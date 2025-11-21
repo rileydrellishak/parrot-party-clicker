@@ -13,3 +13,40 @@
 // Box 2: When the spacebar is pressed down, make the text in Box 2 turn into a flan emoji
 // Box 3: When Box 3 is clicked on, make Party Parrot appear and disappear
 // Box 4: When Box 4 is double clicked, an alert shows up
+"use strict";
+
+const state = {
+  numClicks: 0,
+  parrot: null,
+  resetBtn: null,
+  counterText: null
+};
+
+const loadControls = () => {
+  state.parrot = document.getElementById('parrotImg');
+  state.counterText = document.getElementById('clickCounter');
+  state.resetBtn = document.getElementById('resetButton');
+  state.numClicks = 0;
+}
+
+
+const handleUpdateParrotCounter = (event) => {
+  state.numClicks += 1;
+  state.counterText.textContent = `Clicks: ${state.numClicks}`;
+}
+
+const registerEvents = () => {
+  state.parrot.addEventListener('click', handleUpdateParrotCounter);
+  state.resetBtn.addEventListener('click', handleResetButtonClicked);
+}
+const handleResetButtonClicked = (event) => {
+  state.numClicks = 0;
+  state.counterText.textContent = `Clicks: ${state.numClicks}`;
+}
+
+const onLoaded = () => {
+  loadControls();
+  registerEvents();
+}
+
+onLoaded();
